@@ -19,4 +19,31 @@ model User{
   name String?
   number String
   password String
+  Balance Balance[]
+  OnRampTransaction OnRampTransaction[]
+}
+
+model Balance{
+  id Int @id @default(autoincrement())
+  amount Int
+  userId Int @unique
+  locked Int?
+  user User @relation(fields: [userId],references: [id])
+}
+
+model OnRampTransaction{
+  id Int @id @default(autoincrement())
+  provider String
+  token String @unique
+  startTime DateTime
+  status OnRampStatus
+  amount Int
+  userId Int
+  user User @relation(fields: [userId],references: [id])
+}
+
+enum OnRampStatus{
+  Success
+  Failure
+  Processing
 }
