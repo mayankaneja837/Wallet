@@ -26,7 +26,7 @@ export const OnRamptxn=({transactions}:{
                     </div>
 
                     <div>
-                        {t.time.toString()}
+                        {t.time.toDateString()}
                     </div>
                 </div>
 

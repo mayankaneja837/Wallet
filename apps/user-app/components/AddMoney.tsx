@@ -4,6 +4,7 @@ import {Card} from "@repo/ui/card"
 import {Select} from "@repo/ui/select"
 import {TextInput} from "@repo/ui/textInput"
 import { useState } from "react"
+import { createOnRamptxn } from "../app/lib/actions/createOnRamptxn"
 
 const SUPPORTED_BANKS=[{
     name:"HDFC Bank",
@@ -16,6 +17,7 @@ export const AddMoney=()=>{
 
     const [amount,setAmount]=useState(0)
     const [redirectUrl,setRedirectUrl]=useState(SUPPORTED_BANKS[0]?.redirectUrl)
+    const [provider,setProvider]=useState(SUPPORTED_BANKS[0]?.name)
     return <Card title="Add Money">
         <div className="w-full">
             <TextInput label="Amount" placeholder="Amount" onChange={(value)=>{
@@ -28,13 +30,15 @@ export const AddMoney=()=>{
 
             <Select onSelect={(value)=>{
                 setRedirectUrl(SUPPORTED_BANKS.find(x=>x.name===value)?.redirectUrl || "")
+                setProvider(SUPPORTED_BANKS.find(x=>x.name===value)?.name )
             }} options={SUPPORTED_BANKS.map(x=>({
                 key:x.name,
                 value:x.name
             }))} />
 
             <div className="flex justify-center pt-4">
-                <Button onClick={()=>{
+                <Button onClick={async()=>{
+                    await createOnRamptxn(provider,amount)
                     window.location.href=redirectUrl || ""
                 }} >
                     Add Money
