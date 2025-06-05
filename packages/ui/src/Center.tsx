@@ -1,8 +1,9 @@
 import React from "react"
+//ts-ignore
 export const Center=({children}:{
     children:React.ReactNode
 })=>{
-    <div className="flex justify-center flex-col h-full">
+    return <div className="flex justify-center flex-col h-full">
         <div className="flex justify-center">
             {children}
         </div>
