@@ -5,8 +5,8 @@ export function Card({title,children}:{title:string,children:React.ReactNode}){
     <h1 className="text-xl border-b pb-2">
       {title}
     </h1>
-    <p>
+    <div>
       {children}
-    </p>
+    </div>
   </div>
 }
