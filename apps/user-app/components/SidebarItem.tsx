@@ -11,11 +11,11 @@ export const SideBarItem=({href,title,icon}:{href:string,title:string,icon:React
         router.push(href)
     }}>
         <div className="pr-2">
-            {icon}
+            { icon }
         </div>
 
         <div className="font-bold">
-            {title}
+            { title }
         </div>
     </div>
 }
